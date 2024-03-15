@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}POST Details{% endblock title %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<div>
+    <h5 class="text-xl text-gray-900 dark:text-white">Total review : {{comments | length}}</h5>
+    <div>
+      {% for c in comments %}
+      <div>
+        <div>
+         <span class="text-xl text-gray-900 dark:text-white">Review by:</span>  {{c.user}}
+       </div>
+        <div>
+           <p> <span class="text-xl text-gray-900 dark:text-white"></span>{{c.body}}</p>
+         
+        </div>
+        <div>
+         <span class="text-xl text-gray-900 dark:text-white"></span> {{c.created_on}}
+        </div>
+      </div>
+      <br><br>
+
+      {% endfor %}
+    </div>
+  </div>
+
+<div class="card container mt-5 mb-5 bg-body-warning">
+    <div class="card-body">
+      
+      <h1>Add Review</h1>
+      <form method="post">
+          {% csrf_token %}
+          {{comment_form | crispy}}
+          <button type="submit" class="btn btn-danger">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  
+{% endblock content %}

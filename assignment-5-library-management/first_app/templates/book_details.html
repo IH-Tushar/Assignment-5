@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
+<img src="{{ book.image.url }}" alt="{{ book.name }}" />
+<h3>Name: {{ book.title }}</h3>
+<p>Borrowing Price: ${{ book.borrowing_price }}</p>
+<p>Description: {{book.description}}</p>
+
+
+
+{% if user.is_authenticated %}
+<form method="post" action="{% url 'buy_now' book.id %}">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-warning mb-5">Borrow Now</button>
+ </form>
+{% endif %}
+
+
+{% endblock content %}
+
